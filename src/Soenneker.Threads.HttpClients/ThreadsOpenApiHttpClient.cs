@@ -28,7 +28,7 @@ public sealed class ThreadsOpenApiHttpClient : IThreadsOpenApiHttpClient
     {
         return _httpClientCache.Get(nameof(ThreadsOpenApiHttpClient), (config: _config, baseUrl: _config["Threads:ClientBaseUrl"] ?? _prodBaseUrl), static state =>
         {
-            var apiKey = state.config.GetValueStrict<string>("Threads:AccessToken");
+            var apiKey = state.config.GetStringStrict("Threads:AccessToken");
             string authHeaderName = state.config["Threads:AuthHeaderName"] ?? "Authorization";
             string authHeaderValueTemplate = state.config["Threads:AuthHeaderValueTemplate"] ?? "Bearer {token}";
             string authHeaderValue = authHeaderValueTemplate.Replace("{token}", apiKey, StringComparison.Ordinal);
